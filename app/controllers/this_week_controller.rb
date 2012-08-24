@@ -3,12 +3,11 @@ class ThisWeekController < ApplicationController
   
   	@games = Game.all
   	
-    home = false
-    saturday = false
+  	firstGame = @games.at(@games.index{|g| g.home == true})
 
-    if home == true and saturday == true
+    if firstGame.home and Date.today.day == firstGame.kickoff.day
 			@answer = "It's Saturday!"
-    elsif home == true
+    elsif firstGame.home
 			@answer = "Yes!"
     else
 			@answer = "No."
