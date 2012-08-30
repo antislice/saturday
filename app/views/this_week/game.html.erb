@@ -5,10 +5,7 @@
 </div>
 
 <div>
-<% @games.each do |g| %>
-<%= g.opponent %>
-<%= g.kickoff %>
-<%= g.home %>
-<br>
-<% end %>
+
+Stanford plays <%= @firstGame.opponent %> on <%= @firstGame.kickoff %>
+
 </div>
