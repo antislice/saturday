@@ -4,8 +4,9 @@
 <%= @answer %>
 </p>
 
-<div>
-
-Stanford plays <%= @firstGame.opponent %> on <%= @firstGame.kickoff %>
-
-</div>
+<p class="info">
+Stanford plays <%= @firstGame.opponent %> on <%= @firstGame.kickoff.strftime("%A, %B %-d")%> at <%= @firstGame.kickoff.strftime("%-I:%M %p") %> PDT
+<br/>
+<br/>
+Location: Stanford Stadium
+</p>

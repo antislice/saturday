@@ -3,11 +3,25 @@
 // You can use Sass (SCSS) here: http://sass-lang.com/
 .question {
 	text-align: center;
+	font: {
+		style: italic;
+	}
 }
 
 .answer {
 	font: {
-		size: 40px;
+		size: 48px;
 	}
 	text-align: center;
 }
+
+.info {
+	text-align: center;
+}
+
+body {
+	background: #C41E3A;
+	color: white;
+}
+
+// #C41E3A - stanford red according to wikipediaA
