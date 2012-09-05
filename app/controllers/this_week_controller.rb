@@ -7,8 +7,8 @@ class ThisWeekController < ApplicationController
 		
 		@firstGame = Game.new
 		@firstGame.home = true
-		@firstGame.opponent = "San Jose State University"
-		@firstGame.kickoff = DateTime.new(2012, 8, 31, 19, 0, 0)
+		@firstGame.opponent = "Duke"
+		@firstGame.kickoff = DateTime.new(2012, 9, 15, 19, 30, 0)
 
     if @firstGame.home and Date.today.day == @firstGame.kickoff.day
 			@answer = "It's Saturday!"
