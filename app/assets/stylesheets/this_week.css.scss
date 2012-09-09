@@ -1,27 +1,39 @@
-// Place all the styles related to the ThisWeek controller here.
-// They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
-.question {
-	text-align: center;
+
+#question {
+	color: black;
 	font: {
+		size: 3em;
 		style: italic;
+		family: Tahoma, Geneva, sans-serif;
 	}
 }
 
-.answer {
+#answer {
 	font: {
-		size: 48px;
+		size: 5em;
+		family: Verdana, Geneva, sans-serif;
+		weight: bold;
 	}
-	text-align: center;
 }
 
-.info {
-	text-align: center;
+#info {
+	color: black;
+	font: {
+		size: 1.5em;
+		family: Tahoma, Geneva, sans-serif;
+	}
 }
 
 body {
 	background: #C41E3A;
 	color: white;
+	font-size: 100%;
+	text-align: center;
+}
+
+#all-text {
+	margin-top: 5%;
 }
 
 // #C41E3A - stanford red according to wikipediaA

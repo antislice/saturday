@@ -1,12 +1,15 @@
-<h1 class="question">Is there a Saturday this week?</h1>
+<div id="all-text">
+<h1 id="question">Is there a Saturday this week?</h1>
 
-<p class="answer">
+<p id="answer">
 <%= @answer %>
 </p>
 
-<p class="info">
-Stanford (1-0) plays <%= @firstGame.opponent %> on <%= @firstGame.kickoff.strftime("%A, %B %-d")%> at <%= @firstGame.kickoff.strftime("%-I:%M %p") %> PDT
+<p id="info">
+Stanford plays <%= @firstGame.opponent %> on <%= @firstGame.kickoff.strftime("%A, %B %-d")%> at <%= @firstGame.kickoff.strftime("%-I:%M %p") %> PDT
 <br/>
 <br/>
 Location: Stanford Stadium
 </p>
+
+</div>
