@@ -1,6 +1,5 @@
-// Place all the styles related to the ThisWeek controller here.
-// They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
 .question {
 	text-align: center;
 	font: {
@@ -22,6 +21,10 @@
 body {
 	background: #C41E3A;
 	color: white;
+}
+
+#all-text {
+	margin-top: 5%;
 }
 
 // #C41E3A - stanford red according to wikipediaA
