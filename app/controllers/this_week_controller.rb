@@ -1,24 +1,29 @@
 class ThisWeekController < ApplicationController
   def game
   
-#  	@games = Game.all
-  	
-#  	firstGame = @games.at(@games.index{|g| g.home == true})
+  	@games = Game.all
+	#saturday = DateTime.new(2012, 9, 17, 3, 0, 0)  	
+
+  	@firstGame = @games.at(@games.index{|g| g.kickoff.yday >= Date.today.yday})
 		
-		@firstGame = Game.new
-		@firstGame.home = false
-	#	@firstGame.location = "Seattle, WA"
-		@firstGame.opponent = "Washington (2-1)"
-		@firstGame.kickoff = DateTime.new(2012, 9, 28, 2, 0, 0, '+8')
-		# lawl, so I have to put this in as the UTC time + the offset?
-		#dumb
+	#	@firstGame = Game.new
+	#	@firstGame.home = true
+	#	@firstGame.opponent = "U$C (2-0)"
+	#	@firstGame.kickoff = DateTime.new(2012, 9, 15, 16, 30, 0)
+	
 
     if @firstGame.home and Date.today.day == @firstGame.kickoff.day
-			@answer = "It's Saturday!"
+	  @answer = "It's Saturday!"
     elsif @firstGame.home
-			@answer = "Yes!"
+	  @answer = "Yes!"
     else
-			@answer = "No."
+	  @answer = "No."
+    end
+    
+    if @firstGame.home
+      @location = "Stanford Stadium"
+    else
+      @loction = "not Stanford"
     end
     
   end
