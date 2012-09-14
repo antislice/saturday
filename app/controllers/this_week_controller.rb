@@ -20,11 +20,5 @@ class ThisWeekController < ApplicationController
 	  @answer = "No."
     end
     
-    if @firstGame.home
-      @location = "Stanford Stadium"
-    else
-      @loction = "not Stanford"
-    end
-    
   end
 end
