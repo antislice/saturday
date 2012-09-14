@@ -12,19 +12,12 @@ class ThisWeekController < ApplicationController
 	#	@firstGame.kickoff = DateTime.new(2012, 9, 15, 16, 30, 0)
 	
 
-
     if @firstGame.home and Date.today.day == @firstGame.kickoff.day
 	  @answer = "It's Saturday!"
     elsif @firstGame.home
 	  @answer = "Yes!"
     else
 	  @answer = "No."
-    end
-    
-    if @firstGame.home
-      @location = "Stanford Stadium"
-    else
-      @loction = "not Stanford"
     end
     
   end
