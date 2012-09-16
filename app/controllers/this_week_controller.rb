@@ -7,7 +7,7 @@ class ThisWeekController < ApplicationController
 		
 		@firstGame = Game.new
 		@firstGame.home = false
-		@firstGame.location = "Seattle, WA"
+	#	@firstGame.location = "Seattle, WA"
 		@firstGame.opponent = "Washington (2-1)"
 		@firstGame.kickoff = DateTime.new(2012, 9, 28, 2, 0, 0, '+8')
 		# lawl, so I have to put this in as the UTC time + the offset?
