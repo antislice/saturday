@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120821055126) do
+ActiveRecord::Schema.define(:version => 20120914041140) do
 
   create_table "games", :force => true do |t|
     t.boolean  "home"
@@ -19,6 +19,7 @@ ActiveRecord::Schema.define(:version => 20120821055126) do
     t.datetime "kickoff"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
+    t.string   "location"
   end
 
 end
