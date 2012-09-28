@@ -1,10 +1,10 @@
 class ThisWeekController < ApplicationController
   def game
   
-  	@games = Game.all
-	#saturday = DateTime.new(2012, 9, 17, 3, 0, 0)  	
+    @games = Game.all
+    #saturday = DateTime.new(2012, 9, 17, 3, 0, 0)  	
 
-  	@firstGame = @games.at(@games.index{|g| g.kickoff.yday >= Date.today.yday})
+    @firstGame = @games.at(@games.index{|g| g.kickoff.yday >= Date.today.yday})
 		
 	#	@firstGame = Game.new
 	#	@firstGame.home = true
