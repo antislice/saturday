@@ -11,5 +11,7 @@ Stanford (3-1) plays <%= @firstGame.opponent %> on <%= @firstGame.kickoff.strfti
 <br/>
 Location: <%= @firstGame.location %>
 </p>
-
+<% if @answer == "Sort of!" %>
+Just because it's across the bay doesn't mean you shouldn't go.
+<% end %>
 </div>
