@@ -32,3 +32,6 @@ pickle-email-*.html
 
 # project file
 saturday.komodoproject
+
+# db backups for pushing to herooku
+push_*.dat
