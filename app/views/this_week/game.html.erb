@@ -1,4 +1,6 @@
+<% content_for :body_id, @home_or_away %>
 <div id="all-text">
+
 <h1 id="question">Is there a Saturday this week?</h1>
 
 <p id="answer">
@@ -6,7 +8,7 @@
 </p>
 
 <p id="info">
-Stanford (5-2) plays <%= @firstGame.opponent %> on <%= @firstGame.kickoff.strftime("%A, %B %-d")%> at <%= @firstGame.kickoff.strftime("%-I:%M %p") %> PDT
+Stanford (6-2) plays <%= @firstGame.opponent %> on <%= @firstGame.kickoff.strftime("%A, %B %-d")%> at <%= @firstGame.kickoff.strftime("%-I:%M %p") %> PDT
 <br/>
 <br/>
 Location: <%= @firstGame.location %>

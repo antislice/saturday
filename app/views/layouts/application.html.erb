@@ -5,8 +5,9 @@
   <%= stylesheet_link_tag    "application", :media => "all" %>
   <%= javascript_include_tag "application" %>
   <%= csrf_meta_tags %>
+  <meta name="description" content="Answering the question you're dying to know.  Is Stanford football playing this week?  Are they playing at home?"
 </head>
-<body>
+<body id="<%= yield(:body_id) %>">
 
 <%= yield %>
 
