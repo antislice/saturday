@@ -21,5 +21,7 @@ class ThisWeekController < ApplicationController
 	  @answer = "No."
     end
     
+    @home_or_away = @firstGame.home ? "home" : "away"
+    
   end
 end

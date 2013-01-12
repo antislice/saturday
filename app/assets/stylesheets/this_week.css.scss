@@ -23,9 +23,17 @@
 	}
 }
 
-body {
+body#home {
 	background: #C41E3A;
 	color: white;
+}
+
+body#away {
+	background: white;
+	color: #C41E3A;
+}
+
+body {
 	font-size: 100%;
 	text-align: center;
 	font-family: Tahoma, Geneva, sans-serif;
