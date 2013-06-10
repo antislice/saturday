@@ -4,24 +4,24 @@ class ThisWeekController < ApplicationController
     @games = Game.all
     #saturday = DateTime.new(2012, 9, 17, 3, 0, 0)  	
 
-    @firstGame = @games.at(@games.index{|g| g.kickoff.yday >= Date.today.yday})
+    @first_game = @games.at(@games.index{|g| g.kickoff.yday >= Date.today.yday})
 		
 	#	@firstGame = Game.new
 	#	@firstGame.home = true
 	#	@firstGame.opponent = "U$C (2-0)"
 	#	@firstGame.kickoff = DateTime.new(2012, 9, 15, 16, 30, 0)
     
-    if @firstGame.opponent == "Kal"
+    if @first_game.opponent == "Kal"
       @answer = "Sort of!"
-    elsif @firstGame.home and Date.today.day == @firstGame.kickoff.day
+    elsif @first_game.home and Date.today.day == @first_game.kickoff.day
 	  @answer = "It's Saturday!"
-    elsif @firstGame.home
+    elsif @first_game.home
 	  @answer = "Yes!"
     else
 	  @answer = "No."
     end
     
-    @home_or_away = @firstGame.home ? "home" : "away"
+    @home_or_away = @first_game.home ? "home" : "away"
     
   end
 end
