@@ -22,7 +22,7 @@ class Game < ActiveRecord::Base
                  :opponent => parse_opponent(first_line[subject_str]),
                  :location  => first_line[location_str])
     g.save
-
+puts 'saved!'
     puts g.kickoff
     puts g.opponent
     puts g.location
@@ -40,12 +40,13 @@ class Game < ActiveRecord::Base
   end
 
   def self.parse_kickoff(start_date, start_time)
-    puts 'date ' << start_date
-    puts 'time ' << start_time
-    game_datetime_str = '' << start_date << ' ' << start_time.sub('PT', 'PST') #check on daylight savings
-    dt = DateTime.strptime(game_datetime_str, '%m/%d/%Y %R %P %Z')
-    puts dt
-    dt
+    game_datetime_str = '' << start_date << ' ' << start_time#.sub('PT', 'PDT') #check on daylight savings
+    if DateTime.strptime(game_datetime_str, '%m/%d/%Y %R %P').in_time_zone(Time.zone).dst?
+      game_datetime_str.sub!('PT', 'PDT')
+    else
+      game_datetime_str.sub!('PT', 'PST')
+    end
+    DateTime.strptime(game_datetime_str, '%m/%d/%Y %R %P %Z').in_time_zone(Time.zone)
   end
 
 end
