@@ -14,19 +14,22 @@ class Game < ActiveRecord::Base
     subject_str = 'SUBJECT'
     location_str = 'LOCATION'
 
-    first_line = CSV.read('12-outlook-schedule-mfootbl.csv', headers: true).first.to_hash
-    puts first_line
+    CSV.read('12-outlook-schedule-mfootbl.csv', headers: true).each do |row|
 
-    g = Game.new(:kickoff => parse_kickoff(first_line[start_date], first_line[start_time]),
-                 :home => at_home?(first_line[location_str]),
-                 :opponent => parse_opponent(first_line[subject_str]),
-                 :location  => first_line[location_str])
-    g.save
-puts 'saved!'
-    puts g.kickoff
-    puts g.opponent
-    puts g.location
+      row_hash = row.to_hash
 
+      g = Game.new(:kickoff => parse_kickoff(row_hash[start_date], row_hash[start_time]),
+                   :home => at_home?(row_hash[location_str]),
+                   :opponent => parse_opponent(row_hash[subject_str]),
+                   :location  => row_hash[location_str])
+      g.save!
+      puts g.pretty_print
+    end
+    puts 'done, number of games: ' << Game.count
+  end
+
+  def pretty_print
+    "Game #{id}: time - #{kickoff}, opponent - #{opponent}, location: #{location}"
   end
 
   private
@@ -40,7 +43,12 @@ puts 'saved!'
   end
 
   def self.parse_kickoff(start_date, start_time)
-    game_datetime_str = '' << start_date << ' ' << start_time#.sub('PT', 'PDT') #check on daylight savings
+
+    if start_time == 'TBA'
+      return DateTime.strptime(start_date, '%m/%d/%Y')
+    end
+
+    game_datetime_str = '' << start_date << ' ' << start_time.sub('PT', 'PDT') #check on daylight savings
     if DateTime.strptime(game_datetime_str, '%m/%d/%Y %R %P').in_time_zone(Time.zone).dst?
       game_datetime_str.sub!('PT', 'PDT')
     else

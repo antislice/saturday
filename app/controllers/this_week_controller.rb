@@ -22,6 +22,5 @@ class ThisWeekController < ApplicationController
     end
     
     @home_or_away = @first_game.home ? "home" : "away"
-    
   end
 end
