@@ -1,7 +1,27 @@
-require 'csv'
+require 'icalendar'
+include Icalendar
 
 class Game < ActiveRecord::Base
   attr_accessible :home, :kickoff, :opponent, :location
+
+  def self.cal_update
+    puts 'parsing calendar...'
+
+    raw_file = File.open('single_event.ics').read
+    puts raw_file
+
+    raw_file.gsub!("TZID:America/Los_Angeles\n", '') # makes the file parse correctly
+    # however, may need to insert a timezone section instead
+    # or add the time zone by hand..  (all of them are in pacific at least)
+
+    cal = Icalendar.parse(raw_file).first
+
+    game = cal.events.first
+
+    puts game.dtstamp.zone
+    puts game.summary
+
+  end
 
   def self.update_schedule
     puts 'updating....'

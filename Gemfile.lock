@@ -43,6 +43,7 @@ GEM
       multi_json (~> 1.0)
     hike (1.2.1)
     i18n (0.6.1)
+    icalendar (1.4.1)
     journey (1.0.4)
     jquery-rails (2.1.4)
       railties (>= 3.0, < 5.0)
@@ -110,6 +111,7 @@ PLATFORMS
 
 DEPENDENCIES
   coffee-rails (~> 3.2.1)
+  icalendar
   jquery-rails
   pg
   rails (= 3.2.11)

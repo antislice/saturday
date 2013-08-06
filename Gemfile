@@ -27,3 +27,4 @@ end
 gem 'jquery-rails'
 
 gem 'whenever', :require => false
+gem 'icalendar'
