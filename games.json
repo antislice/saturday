@@ -1,0 +1,15 @@
+[
+    {"opponent" : "San Jose State", "date" : "9/7/13",   "time" : "8:00 PM", "location" : "Stanford"},
+    {"opponent" : "Army",           "date" : "9/14/13",  "time" : "9:00 AM", "location" : "West Point, NY"},
+    {"opponent" : "Arizona State",  "date" : "9/21/13",  "time" : "TBD", "location" : "Stanford"},
+    {"opponent" : "Washington State","date" : "9/28/13", "time" : "TBD", "location" : "Seattle, WA"},
+    {"opponent" : "Washington",     "date" : "10/5/13",  "time" : "TBD", "location" : "Stanford"},
+    {"opponent" : "Utah",           "date" : "10/12/13", "time" : "TBD", "location" : "Salt Lake City, UT"},
+    {"opponent" : "UCLA",           "date" : "10/19/13", "time" : "TBD", "location" : "Stanford"},
+    {"opponent" : "Oregon State",   "date" : "10/26/13", "time" : "TBD", "location" : "Corvallis, OR"},
+    {"opponent" : "Oregon",         "date" : "11/7/13",  "time" : "6:00 PM", "location" : "Stanford"},
+    {"opponent" : "U$C",            "date" : "11/16/13", "time" : "TBD", "location" : "Los Angeles, CA"},
+    {"opponent" : "Kal",            "date" : "11/23/13", "time" : "TBD", "location" : "Stanford"},
+    {"opponent" : "Notre Dame",     "date" : "11/30/13", "time" : "TBD", "location" : "Stanford"},
+    {"opponent" : "TBD",            "date" : "12/7/13",  "time" : "TBD", "location" : "TBD"}
+]

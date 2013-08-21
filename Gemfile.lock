@@ -111,7 +111,7 @@ PLATFORMS
 
 DEPENDENCIES
   coffee-rails (~> 3.2.1)
-  icalendar
+  icalendar (~> 1.4.1)
   jquery-rails
   pg
   rails (= 3.2.11)

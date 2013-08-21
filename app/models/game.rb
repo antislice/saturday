@@ -4,7 +4,17 @@ include Icalendar
 class Game < ActiveRecord::Base
   attr_accessible :home, :kickoff, :opponent, :location
 
+  def self.import_starter_data
+    # TODO
+    # import data from json
+  end
+
   def self.cal_update
+    # TODO
+    # change to look up yahoo calendar
+    # map events by date?
+    # only update if something changed from TBD or time changed
+
     puts 'parsing calendar...'
 
     raw_file = File.open('single_event.ics').read
