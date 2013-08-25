@@ -11,15 +11,18 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120914041140) do
+ActiveRecord::Schema.define(:version => 20130825222752) do
 
   create_table "games", :force => true do |t|
     t.boolean  "home"
     t.string   "opponent"
-    t.datetime "kickoff"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
     t.string   "location"
+    t.string   "note"
+    t.string   "network"
+    t.date     "game_date"
+    t.time     "game_time"
   end
 
 end
