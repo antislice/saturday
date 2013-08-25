@@ -7,6 +7,22 @@ class Game < ActiveRecord::Base
   def self.import_starter_data
     # TODO
     # import data from json
+
+    Game.destroy_all # this is essentially a reset of the db
+
+    json = JSON.parse(File.open('games.json').read)
+    json.each do |item|
+      g = Game.create!(:home => at_home?(item['location']),
+                 :opponent => item['opponent'],
+                 :location => item['location'],
+                 :note => item['note'],
+                 :game_date => DateTime.strptime(item['date'], '%m/%d/%y'))
+      g.save!
+    end
+
+    Rails.logger.info "there are currently #{Game.count} games saved after importing starter data"
+
+    # cal_update
   end
 
   def self.cal_update
@@ -59,7 +75,7 @@ class Game < ActiveRecord::Base
   end
 
   def pretty_print
-    "Game #{id}: time - #{kickoff}, opponent - #{opponent}, location: #{location}"
+    "Game #{id}: date - #{game_date}, time - #{game_time}, opponent - #{opponent}, location: #{location}"
   end
 
   private
