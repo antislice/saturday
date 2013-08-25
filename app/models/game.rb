@@ -2,7 +2,7 @@ require 'icalendar'
 include Icalendar
 
 class Game < ActiveRecord::Base
-  attr_accessible :home, :kickoff, :opponent, :location
+  attr_accessible :home, :opponent, :location, :note, :game_date, :game_time
 
   def self.import_starter_data
     # TODO

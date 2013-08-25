@@ -9,7 +9,7 @@
 
 <p id="info">There's no more football until September, sorry</p>
 <!--<p id="info">
-Stanford (6-2) plays <%= @first_game.opponent %> on <%= @first_game.kickoff.strftime("%A, %B %-d")%> at <%= @first_game.kickoff.strftime("%-I:%M %p") %> PDT
+Stanford (6-2) plays <%= @first_game.opponent %> on <%= @first_game.game_date.strftime("%A, %B %-d")%> at <%= @first_game.game_time.strftime("%-I:%M %p") %> PDT
 <br/>
 <br/>
 Location: <%= @first_game.location %>
