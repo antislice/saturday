@@ -2,22 +2,20 @@ require 'icalendar'
 include Icalendar
 
 class Game < ActiveRecord::Base
-  attr_accessible :home, :opponent, :location, :note, :game_date, :game_time
+  attr_accessible :opponent, :location, :note, :game_date, :game_time
 
   def self.import_starter_data
-    # TODO
-    # import data from json
-
     Game.destroy_all # this is essentially a reset of the db
 
     json = JSON.parse(File.open('games.json').read)
     json.each do |item|
-      g = Game.create!(:home => at_home?(item['location']),
-                 :opponent => item['opponent'],
+      game = Game.create!(:opponent => item['opponent'],
                  :location => item['location'],
-                 :note => item['note'],
-                 :game_date => DateTime.strptime(item['date'], '%m/%d/%y'))
-      g.save!
+                 :note => item['note'])
+      update_game_date_and_time(item['time'], item['date'], game)
+
+      Rails.logger.debug game.pretty_print
+      game.save!
     end
 
     Rails.logger.info "there are currently #{Game.count} games saved after importing starter data"
@@ -25,53 +23,25 @@ class Game < ActiveRecord::Base
     # cal_update
   end
 
-  def self.cal_update
+  def self.update_from_ics
     # TODO
     # change to look up yahoo calendar
-    # map events by date?
+    # map events by date? (match events by Date, update if Time is different?)
     # only update if something changed from TBD or time changed
 
-    puts 'parsing calendar...'
+    Rails.logger.debug 'parsing calendar...'
 
-    raw_file = File.open('single_event.ics').read
-    puts raw_file
-
-    raw_file.gsub!("TZID:America/Los_Angeles\n", '') # makes the file parse correctly
-    # however, may need to insert a timezone section instead
-    # or add the time zone by hand..  (all of them are in pacific at least)
-
+    raw_file = File.open('yahoo-calendar.ics').read
     cal = Icalendar.parse(raw_file).first
 
-    game = cal.events.first
-
-    puts game.dtstamp.zone
-    puts game.summary
+    cal.events.each do |game|
+      puts game.summary << ' on ' << game.dtstart.in_time_zone(Time.zone).to_s
+    end
 
   end
 
-  def self.update_schedule
-    puts 'updating....'
-
-    Game.destroy_all
-
-# header names
-    start_date = 'START DATE'
-    start_time = 'START TIME'
-    subject_str = 'SUBJECT'
-    location_str = 'LOCATION'
-
-    CSV.read('12-outlook-schedule-mfootbl.csv', headers: true).each do |row|
-
-      row_hash = row.to_hash
-
-      g = Game.new(:kickoff => parse_kickoff(row_hash[start_date], row_hash[start_time]),
-                   :home => at_home?(row_hash[location_str]),
-                   :opponent => parse_opponent(row_hash[subject_str]),
-                   :location  => row_hash[location_str])
-      g.save!
-      puts g.pretty_print
-    end
-    puts 'done, number of games: ' << Game.count
+  def home
+    location.downcase.include?('stanford')
   end
 
   def pretty_print
@@ -84,23 +54,15 @@ class Game < ActiveRecord::Base
     subject.partition('vs.').last.strip.gsub(/[^0-9a-z ]/i, '')
   end
 
-  def self.at_home?(location)
-    location.downcase.include?('stanford')
-  end
+  def self.update_game_date_and_time(start_time, start_date, game)
 
-  def self.parse_kickoff(start_date, start_time)
-
-    if start_time == 'TBA'
-      return DateTime.strptime(start_date, '%m/%d/%Y')
+    if start_time == 'TBD'
+      game.game_date = DateTime.strptime(start_date, '%m/%d/%y')
+      game.game_time = nil
+      return
     end
 
-    game_datetime_str = '' << start_date << ' ' << start_time.sub('PT', 'PDT') #check on daylight savings
-    if DateTime.strptime(game_datetime_str, '%m/%d/%Y %R %P').in_time_zone(Time.zone).dst?
-      game_datetime_str.sub!('PT', 'PDT')
-    else
-      game_datetime_str.sub!('PT', 'PST')
-    end
-    DateTime.strptime(game_datetime_str, '%m/%d/%Y %R %P %Z').in_time_zone(Time.zone)
+    game.game_date = game.game_time = DateTime.strptime("#{start_date} #{start_time}", '%m/%d/%y %l:%M %p').in_time_zone(Time.zone)
   end
 
 end
