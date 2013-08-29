@@ -48,8 +48,8 @@ class Game < ActiveRecord::Base
     end
   end
 
-  def home
-    location.downcase.include?('stanford')
+  def home_or_away
+    location.downcase.include?('stanford') ? 'home' : 'away'
   end
 
   def pretty_print

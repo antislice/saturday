@@ -1,4 +1,4 @@
-<% content_for :body_id, @home_or_away %>
+<% content_for :body_id, @first_game.home_or_away %>
 <div id="all-text">
 
 <h1 id="question">Is there a Saturday this week?</h1>
@@ -7,14 +7,10 @@
 <%= @answer %>
 </p>
 
-<p id="info">There's no more football until September, sorry</p>
-<!--<p id="info">
-Stanford (6-2) plays <%= @first_game.opponent %> on <%= @first_game.game_date.strftime("%A, %B %-d")%> at <%= @first_game.game_time.strftime("%-I:%M %p") %> PDT
+<p id="info">
+Stanford plays <%= @first_game.opponent %> on <%= @first_game.game_date.strftime('%A, %B %-d')%> at <%= @first_game.game_time.strftime('%-I:%M %p') %> PDT
 <br/>
 <br/>
 Location: <%= @first_game.location %>
-</p>-->
-<% if @answer == "Sort of!" %>
-Just because it's across the bay doesn't mean you shouldn't go.
-<% end %>
+</p>
 </div>
