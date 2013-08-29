@@ -14,30 +14,38 @@ class Game < ActiveRecord::Base
                  :note => item['note'])
       update_game_date_and_time(item['time'], item['date'], game)
 
-      Rails.logger.debug game.pretty_print
+      Rails.logger.debug "read in this game from json: #{game.pretty_print}"
       game.save!
     end
 
     Rails.logger.info "there are currently #{Game.count} games saved after importing starter data"
-
-    # cal_update
+    update_from_ics
   end
 
   def self.update_from_ics
-    # TODO
-    # change to look up yahoo calendar
-    # map events by date? (match events by Date, update if Time is different?)
-    # only update if something changed from TBD or time changed
-
     Rails.logger.debug 'parsing calendar...'
 
     raw_file = File.open('yahoo-calendar.ics').read
     cal = Icalendar.parse(raw_file).first
 
-    cal.events.each do |game|
-      puts game.summary << ' on ' << game.dtstart.in_time_zone(Time.zone).to_s
-    end
+    cal.events.each do |event|
+      start_datetime = event.dtstart.in_time_zone(Time.zone)
+      game = Game.find_by_game_date(start_datetime)
 
+      next if game.nil? # make a new game obj or something... (iff it's after the last game)
+
+      Rails.logger.debug "found this game: #{game.pretty_print}" unless game.nil?
+
+      # todo there's probably a better way to do "update only if different"
+      if game.game_time != start_datetime
+        Rails.logger.debug 'the game has a new time!'
+        game.game_time = game.game_date = start_datetime
+        # game.network = event.something...
+        game.save
+
+        Rails.logger.debug "new game info: #{game.pretty_print}"
+      end
+    end
   end
 
   def home
