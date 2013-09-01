@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130826053215) do
+ActiveRecord::Schema.define(:version => 20130901065250) do
 
   create_table "games", :force => true do |t|
     t.string   "opponent"
@@ -20,8 +20,8 @@ ActiveRecord::Schema.define(:version => 20130826053215) do
     t.string   "location"
     t.string   "note"
     t.string   "network"
-    t.date     "game_date"
-    t.time     "game_time"
+    t.datetime "game_date"
+    t.datetime "game_time"
   end
 
 end
