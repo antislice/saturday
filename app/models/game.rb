@@ -56,10 +56,6 @@ class Game < ActiveRecord::Base
     "Game #{id}: date - #{game_date}, time - #{game_time}, opponent - #{opponent}, location: #{location}"
   end
 
-  def game_datetime_local
-    game_time.in_time_zone(Time.zone)
-  end
-
   private
 
   def self.parse_opponent(subject)
