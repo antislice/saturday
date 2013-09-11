@@ -28,3 +28,4 @@ gem 'jquery-rails'
 
 gem 'whenever', :require => false
 gem 'icalendar', '~> 1.4.1'
+gem 'curb'

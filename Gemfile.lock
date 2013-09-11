@@ -38,6 +38,7 @@ GEM
       coffee-script-source
       execjs
     coffee-script-source (1.6.3)
+    curb (0.8.4)
     erubis (2.7.0)
     execjs (2.0.1)
     hike (1.2.3)
@@ -110,6 +111,7 @@ PLATFORMS
 
 DEPENDENCIES
   coffee-rails (~> 3.2.1)
+  curb
   icalendar (~> 1.4.1)
   jquery-rails
   pg

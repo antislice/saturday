@@ -14,19 +14,21 @@ class Game < ActiveRecord::Base
                  :note => item['note'])
       update_game_date_and_time(item['time'], item['date'], game)
 
-      Rails.logger.debug "read in this game from json: #{game.pretty_print}"
+      logger.debug "read in this game from json: #{game.pretty_print}"
       game.save!
     end
 
-    Rails.logger.info "there are currently #{Game.count} games saved after importing starter data"
+    logger.info "there are currently #{Game.count} games saved after importing starter data"
     update_from_ics
   end
 
   def self.update_from_ics
-    Rails.logger.debug 'parsing calendar...'
+    logger.info 'getting calendar...'
 
-    raw_file = File.open('yahoo-calendar.ics').read
-    cal = Icalendar.parse(raw_file).first
+    ics_from_http = Curl.get('http://sports.yahoo.com/ncaa/football/teams/sss/ical.ics')
+    cal = Icalendar.parse(ics_from_http.body_str).first
+
+    logger.info 'parsing calendar...'
 
     cal.events.each do |event|
       start_datetime = event.dtstart.in_time_zone(Time.zone)
@@ -34,18 +36,19 @@ class Game < ActiveRecord::Base
 
       next if game.nil? # make a new game obj or something... (iff it's after the last game)
 
-      Rails.logger.debug "found this game: #{game.pretty_print}" unless game.nil?
+      logger.debug "found this game: #{game.pretty_print}" unless game.nil?
 
       # todo there's probably a better way to do "update only if different"
       if game.game_time != start_datetime
-        Rails.logger.debug 'the game has a new time!'
+        logger.debug 'the game has a new time!'
         game.game_time = game.game_date = start_datetime
         # game.network = event.something...
         game.save
 
-        Rails.logger.debug "new game info: #{game.pretty_print}"
+        logger.debug "new game info: #{game.pretty_print}"
       end
     end
+    logger.info 'finished!'
   end
 
   def home_or_away
@@ -62,6 +65,7 @@ class Game < ActiveRecord::Base
     subject.partition('vs.').last.strip.gsub(/[^0-9a-z ]/i, '')
   end
 
+  # todo is this used?
   def self.update_game_date_and_time(start_time, start_date, game)
 
     if start_time == 'TBD'
