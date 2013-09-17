@@ -32,7 +32,8 @@ class Game < ActiveRecord::Base
 
     cal.events.each do |event|
       start_datetime = event.dtstart.in_time_zone(Time.zone)
-      game = Game.find_by_game_date(start_datetime)
+
+      game = Game.find do |g| g.game_date.yday == start_datetime.yday  end
 
       next if game.nil? # make a new game obj or something... (iff it's after the last game)
 
@@ -65,9 +66,7 @@ class Game < ActiveRecord::Base
     subject.partition('vs.').last.strip.gsub(/[^0-9a-z ]/i, '')
   end
 
-  # todo is this used?
   def self.update_game_date_and_time(start_time, start_date, game)
-
     if start_time == 'TBD'
       game.game_date = DateTime.strptime(start_date, '%m/%d/%y')
       game.game_time = nil
