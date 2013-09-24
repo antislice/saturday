@@ -1,6 +1,8 @@
 Saturday::Application.routes.draw do
 
   root :to => "this_week#game"
+
+  match 'about' => 'this_week#about'
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

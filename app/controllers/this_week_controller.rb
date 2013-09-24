@@ -13,4 +13,7 @@ class ThisWeekController < ApplicationController
     end
     
   end
+
+  def about
+  end
 end
