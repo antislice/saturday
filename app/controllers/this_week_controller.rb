@@ -6,7 +6,7 @@ class ThisWeekController < ApplicationController
     
     if @first_game.home_or_away == 'home' and Date.today.yday == @first_game.game_date.yday
 	    @answer = 'It\'s Saturday!'
-    elsif @first_game.home_or_away == 'home'
+    elsif @first_game.home_or_away == 'home' and Date.today.cweek == @first_game.game_date.to_date.cweek
 	    @answer = 'Yes!'
     else
 	    @answer = 'No.'
