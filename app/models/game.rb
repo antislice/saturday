@@ -25,7 +25,7 @@ class Game < ActiveRecord::Base
   def self.update_from_ics
     logger.info 'getting calendar...'
 
-    ics_from_http = Curl.get('http://sports.yahoo.com/ncaa/football/teams/sss/ical.ics')
+    ics_from_http = Curl.get('http://sports.yahoo.com/ncaaf/teams/sss/ical.ics')
     cal = Icalendar.parse(ics_from_http.body_str).first
 
     logger.info 'parsing calendar...'
